@@ -1,4 +1,4 @@
-# WEB de Amigo Secreto 🎁
+# 🔷 WEB de Amigo Secreto 
 
 Desafio practico de aplicación web donde podés agregar nombres y sortear aleatoriamente un "amigo secreto" entre los ingresados.
 
