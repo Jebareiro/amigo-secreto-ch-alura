@@ -3,39 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Secreto - Oracle ONE & Alura Latam</title>
+
+    <!-- Vinculación del archivo de estilos CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Preconexión e importación de la tipografía "Plus Jakarta Sans" desde Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <title>Amigo Secreto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <main class="main-content">
-        <header class="header-banner">
-            <h1 class="main-title">Amigo Secreto</h1>
-            <img src="assets/amigo-secreto.png" alt="Imagen representativa de amigo secreto">
+
+    <!-- Contenedor principal que envuelve toda la aplicación -->
+    <div class="app-container">
+
+        <!-- ========================================== -->
+        <!-- 1. ENCABEZADO SUPERIOR (Header)            -->
+        <!-- ========================================== -->
+        <header class="app-header">
+            <!-- Logotipo y título del proyecto -->
+            <div class="brand">
+                <div class="brand-icon">🎁</div>
+                <div class="brand-text">
+                    <h1>Amigo Secreto</h1>
+                    <p>La magia de regalar, sin complicaciones</p>
+                </div>
+            </div>
+            <!-- Frase decorativa superior derecha -->
+            <div class="header-tagline">
+                Buenas personas hacen grandes sorpresas 💜
+            </div>
         </header>
-        
-        <section class="input-section">
-            <h2 class="section-title">Digite el nombre de sus amigos</h2>
-            <div class="input-wrapper">
-                <input type="text" id="amigo" class="input-name" placeholder="Escribe un nombre">
-                <button class="button-add" onclick="agregarAmigo()">Añadir</button>
-            </div>
-           
-            <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
-            <ul id="resultado" class="result-list" aria-live="polite"></ul>
 
-            <div class="button-container">
-                <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
-                    <img src="assets/play_circle_outline.png" alt="Ícono para sortear">
-                    Sortear amigo
-                </button>
-            </div>
-        </section>
-    </main>
+        <!-- ========================================== -->
+        <!-- 2. GRILLA PRINCIPAL DE 3 COLUMNAS (Main)   -->
+        <!-- ========================================== -->
+        <main class="dashboard-grid">
+            
+            <!-- -------------------------------------- -->
+            <!-- COLUMNA 1: Formulario, Lista y Acciones -->
+            <!-- -------------------------------------- -->
+            <section class="card card-input">
+                <!-- Título del paso 1 -->
+                <div class="card-header">
+                    <span class="step-icon">👤</span>
+                    <h2>1. Agrega participantes</h2>
+                </div>
 
-    <script src="app.js" defer></script>
+                <!-- Campo de texto y botón '+' para añadir nombres -->
+                <div class="input-group">
+                    <input type="text" id="amigo" placeholder="Escribe un nombre..." autocomplete="off">
+                    <button id="btnAgregar" onclick="agregarAmigo()" class="btn-add">+</button>
+                </div>
+                <!-- Párrafo dinámico para mostrar mensajes de error (vacío, duplicado, etc.) -->
+                <p id="mensaje-error" class="error-text"></p>
+
+                <!-- Área donde se renderizarán los nombres agregados -->
+                <div class="list-section">
+                    <div class="list-header">
+                        <span>👥 Lista de participantes (<span id="contador">0</span>)</span>
+                    </div>
+                    <!-- Lista desordenada que JS manipulará para agregar los <li> con avatar y 'x' -->
+                    <ul id="listaAmigos" class="participants-list"></ul>
+                </div>
+
+                <!-- Botones de control (Sorteo y Reinicio) -->
+                <div class="actions-group">
+                    <button class="btn-primary" onclick="sortearAmigo()">
+                        <span>🔀</span> Realizar sorteo
+                    </button>
+                    <button class="btn-secondary" onclick="reiniciarJuego()">
+                        <span>🔄</span> Reiniciar
+                    </button>
+                </div>
+            </section>
+
+            <!-- -------------------------------------- -->
+            <!-- COLUMNA 2: Ilustración central / Resultado -->
+            <!-- -------------------------------------- -->
+            <section class="card card-display">
+                <!-- Estado Inicial: Muestra la ilustración del regalo antes de sortear -->
+                <div id="display-inicial" class="display-content">
+                    <div class="illustration-box">
+                        <span class="gift-emoji">🎁</span>
+                    </div>
+                    <h2>¡Sorteo listo para la diversión!</h2>
+                    <p>Con una lista de participantes, la magia del amigo secreto comienza.</p>
+                    <span class="heart-icon">💜</span>
+                </div>
+
+                <!-- Estado Resultado: Oculto por defecto (hidden), se muestra al sortear -->
+                <div id="display-resultado" class="display-content hidden">
+                    <div class="winner-box">
+                        <span class="trophy-emoji">🎉</span>
+                    </div>
+                    <p class="result-label">El amigo secreto seleccionado es:</p>
+                    <h2 id="resultado" class="winner-name">---</h2>
+                </div>
+            </section>
+
+            <!-- -------------------------------------- -->
+            <!-- COLUMNA 3: Tarjetas de Información e Inspiración -->
+            <!-- -------------------------------------- -->
+            <aside class="sidebar-column">
+                <!-- Tarjeta "¿Cómo funciona?" -->
+                <div class="card card-info">
+                    <div class="card-header">
+                        <span class="step-icon">💡</span>
+                        <h2>¿Cómo funciona?</h2>
+                    </div>
+                    <ol class="instructions-list">
+                        <li>
+                            <span class="num">1</span>
+                            <span>Agrega a los participantes</span>
+                        </li>
+                        <li>
+                            <span class="num">2</span>
+                            <span>Haz clic en "Realizar sorteo"</span>
+                        </li>
+                        <li>
+                            <span class="num">3</span>
+                            <span>¡Descubre quién es tu amigo secreto!</span>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Tarjeta con frase inspiradora e icono -->
+                <div class="card card-quote">
+                    <div class="quote-header">
+                        <span>✨ Un pequeño gesto...</span>
+                    </div>
+                    <p>...puede hacer una gran diferencia.</p>
+                    <div class="gift-mini-box">🎁</div>
+                </div>
+            </aside>
+
+        </main>
+
+        <!-- ========================================== -->
+        <!-- 3. PIE DE PAGINA (Footer)                  -->
+        <!-- ========================================== -->
+        <footer class="app-footer">
+            <p>💜 Amigo Secreto • Hecho con cariño</p>
+            <p class="tech-stack">&lt;/&gt; HTML • CSS • JavaScript</p>
+        </footer>
+    </div>
+
+    <!-- Carga de la lógica JavaScript al final para asegurar que la vista esté montada -->
+    <script src="app.js"></script>
 </body>
 </html>

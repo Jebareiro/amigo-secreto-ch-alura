@@ -1,162 +1,395 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================================================== */
 :root {
-    --color-primary: #4B69FD;
-    --color-secondary: #FFF9EB;
-    --color-tertiary: #C4C4C4;
-    --color-button: #fe652b;
-    --color-button-hover: #e55720;
-    --color-text: #444444;
-    --color-white: #FFFFFF;
+    --bg-main: #f4f6fa;
+    --card-bg: #ffffff;
+    --primary-purple: #6366f1;
+    --primary-purple-hover: #4f46e5;
+    --accent-purple: #a5b4fc;
+    --text-title: #1e293b;
+    --text-body: #64748b;
+    --border-color: #f1f5f9;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.03);
+    --radius-card: 20px;
+    --radius-element: 12px;
 }
 
-/* Estilos generales */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
-    height: 100vh;
-    background-color: var(--color-primary);
+    background-color: var(--bg-main);
+    color: var(--text-title);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px 20px;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+/* Contenedor principal centrado */
+.app-container {
     width: 100%;
+    max-width: 1100px;
 }
 
-/* Banner */
-.header-banner {
-    flex: 40%;
+/* ==========================================================================
+   2. ENCABEZADO (Header)
+   ========================================================================== */
+.app-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 40px 0 0;
+    margin-bottom: 25px;
 }
 
-/* Sección de entrada */
-.input-section {
-    flex: 60%;
-    background-color: var(--color-secondary);
-    border: 1px solid #000;
-    border-radius: 64px 64px 0 0;
+.brand {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px;
-    width: 100%;
+    gap: 15px;
 }
 
-/* Títulos */
-.main-title {
-    font-size: 48px;
-    font-family: "Merriweather", serif;
-    font-weight: 900;
-    font-style: italic;
-    color: var(--color-white);
+.brand-icon {
+    font-size: 2rem;
+    background: #eef2ff;
+    padding: 10px;
+    border-radius: 14px;
 }
 
-.section-title {
-    font-family: "Inter", serif;
-    font-size: 36px;
+.brand-text h1 {
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-primary);
-    margin: 10px 0;
-    text-align: center;
+    color: var(--text-title);
 }
 
-/* Contenedores de entrada y botón */
-.input-wrapper {
+.brand-text p {
+    font-size: 0.85rem;
+    color: var(--text-body);
+}
+
+.header-tagline {
+    font-size: 0.85rem;
+    color: var(--primary-purple);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   3. GRILLA PRINCIPAL DE 3 COLUMNAS (Dashboard Grid)
+   ========================================================================== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 0.8fr; /* 3 columnas proporcionales */
+    gap: 20px;
+    align-items: start;
+}
+
+/* Estilo base para todas las tarjetas */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.step-icon {
+    background: #eef2ff;
+    color: var(--primary-purple);
+    padding: 6px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.card-header h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-title);
+}
+
+/* ==========================================================================
+   4. COLUMNA 1: FORMULARIO, LISTA Y BOTONES
+   ========================================================================== */
+.input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-element);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-purple);
+}
+
+.btn-add {
+    background: var(--primary-purple);
+    color: white;
+    border: none;
+    width: 44px;
+    border-radius: var(--radius-element);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-add:hover {
+    background: var(--primary-purple-hover);
+}
+
+.error-text {
+    color: #ef4444;
+    font-size: 0.75rem;
+    margin-top: 6px;
+    min-height: 18px;
+}
+
+.list-section {
+    margin-top: 15px;
+}
+
+.list-header {
+    font-size: 0.8rem;
+    color: var(--text-body);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.participants-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Elemento individual de la lista (generado con JS) */
+.participant-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: var(--radius-element);
+    font-size: 0.85rem;
+}
+
+.participant-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 600px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-remove:hover {
+    color: #ef4444;
+}
+
+.actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin-top: 20px;
 }
 
-.input-name {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #000;
-    border-radius: 25px 0 0 25px;
-    font-size: 16px;
-}
-
-.button-container {
-    width: 300px;
-    justify-content: center;
-}
-
-/* Estilos de entrada de texto */
-.input-title {
-    flex: 1;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 2px solid #333;
-    border-right: none;
-    border-radius: 25px 0 0 25px;
-    font-family: "Merriweather", serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilos de botón */
-button {
-    padding: 15px 30px;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    border: 2px solid #000;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+.btn-primary {
+    background: var(--primary-purple);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: var(--radius-element);
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
-.button-add {
-    background-color: var(--color-tertiary);
-    color: var(--color-text);
-    border-radius: 0 25px 25px 0;
+.btn-primary:hover {
+    background: var(--primary-purple-hover);
 }
 
-.button-add:hover {
-    background-color: #a1a1a1;
+.btn-secondary {
+    background: transparent;
+    color: var(--text-body);
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    border-radius: var(--radius-element);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
 }
 
-/* Listas */
-ul {
-    list-style-type: none;
-    color: var(--color-text);
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    margin: 20px 0;
+.btn-secondary:hover {
+    background: #f8fafc;
 }
 
-.result-list {
-    margin-top: 15px;
-    color: #05DF05;
-    font-size: 22px;
-    font-weight: bold;
+/* ==========================================================================
+   5. COLUMNA 2: TARJETA CENTRAL / RESULTADOS
+   ========================================================================== */
+.card-display {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
 }
 
-/* Botón de sortear título */
-.button-draw {
+.illustration-box, .winner-box {
+    background: #f0f3ff;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    width: 100%;
-    padding: 10px 40px;
-    color: var(--color-white);
-    background-color: var(--color-button);
-    font-size: 16px;
+    justify-content: center;
+    font-size: 3.5rem;
+    margin: 0 auto 20px auto;
 }
 
-.button-draw img {
-    margin-right: 40px;
+.display-content h2 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
 }
 
-.button-draw:hover {
-    background-color: var(--color-button-hover);
+.display-content p {
+    font-size: 0.85rem;
+    color: var(--text-body);
+    max-width: 250px;
+    margin: 0 auto 15px auto;
+}
+
+.winner-name {
+    font-size: 2rem;
+    color: var(--primary-purple);
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   6. COLUMNA 3: TARJETAS INFORMATIVAS
+   ========================================================================== */
+.sidebar-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.instructions-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.instructions-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--text-title);
+}
+
+.instructions-list .num {
+    background: #f1f5f9;
+    color: var(--primary-purple);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.card-quote {
+    background: #FAF8FF;
+    border: 1px dashed #DDD6FE;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+}
+
+.quote-header {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #7C3AED;
+    margin-bottom: 5px;
+}
+
+.card-quote p {
+    font-size: 0.8rem;
+    color: var(--text-body);
+}
+
+.gift-mini-box {
+    font-size: 2.5rem;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   7. FOOTER Y RESPONSIVIDAD
+   ========================================================================== */
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Pasa a 1 sola columna en dispositivos móviles */
+    }
 }
