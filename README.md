@@ -29,7 +29,7 @@ Puedes acceder y probar la versión desplegada en tiempo real a través de GitHu
 
 | Vista Principal (Dashboard) | Registro de Participantes | Sorteo y Resultado |
 | :---: | :---: | :---: |
-| <img src="evidencia1.png" width="250"> | <img src="evidencia2.png" width="250"> | <img src="evidencia3.png" width="250"> |
+| <img src="assets/evidencia1.png" width="250"> | <img src="assets/evidencia2.png" width="250"> | <img src="assets/evidencia3.png" width="250"> |
 ---
 
 ## 💻 Ejecución Local
