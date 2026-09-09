@@ -52,7 +52,7 @@
                     <input type="text" id="amigo" placeholder="Escribe un nombre..." autocomplete="off">
                     <button id="btnAgregar" onclick="agregarAmigo()" class="btn-add">+</button>
                 </div>
-                <!-- Párrafo dinámico para mostrar mensajes de error (vacío, duplicado, etc.) -->
+                <!-- Párrafo dinámico para mostrar mensajes de error -->
                 <p id="mensaje-error" class="error-text"></p>
 
                 <!-- Área donde se renderizarán los nombres agregados -->
@@ -60,7 +60,6 @@
                     <div class="list-header">
                         <span>👥 Lista de participantes (<span id="contador">0</span>)</span>
                     </div>
-                    <!-- Lista desordenada que JS manipulará para agregar los <li> con avatar y 'x' -->
                     <ul id="listaAmigos" class="participants-list"></ul>
                 </div>
 
@@ -76,10 +75,10 @@
             </section>
 
             <!-- -------------------------------------- -->
-            <!-- COLUMNA 2: Ilustración central / Resultado -->
+            <!-- COLUMNA 2: Ilustración central / Resultado Paso a Paso -->
             <!-- -------------------------------------- -->
             <section class="card card-display">
-                <!-- Estado Inicial: Muestra la ilustración del regalo antes de sortear -->
+                <!-- Estado Inicial: Muestra la ilustración antes de sortear -->
                 <div id="display-inicial" class="display-content">
                     <div class="illustration-box">
                         <span class="gift-emoji">🎁</span>
@@ -89,13 +88,18 @@
                     <span class="heart-icon">💜</span>
                 </div>
 
-                <!-- Estado Resultado: Oculto por defecto (hidden), se muestra al sortear -->
+                <!-- Estado Resultado: Se muestra al presionar "Realizar sorteo" -->
                 <div id="display-resultado" class="display-content hidden">
                     <div class="winner-box">
                         <span class="trophy-emoji">🎉</span>
                     </div>
-                    <p class="result-label">El amigo secreto seleccionado es:</p>
+                    <p id="contador-pareja" class="result-label">Pareja 1 de X</p>
                     <h2 id="resultado" class="winner-name">---</h2>
+
+                    <!-- Botón para avanzar a la siguiente pareja -->
+                    <button id="btnSiguiente" class="btn-primary" onclick="siguientePareja()" style="margin-top: 20px;">
+                        Siguiente Pareja ➔
+                    </button>
                 </div>
             </section>
 
@@ -120,7 +124,7 @@
                         </li>
                         <li>
                             <span class="num">3</span>
-                            <span>¡Descubre quién es tu amigo secreto!</span>
+                            <span>Descubre las parejas una a una</span>
                         </li>
                     </ol>
                 </div>
@@ -145,7 +149,7 @@
         </footer>
     </div>
 
-    <!-- Carga de la lógica JavaScript al final para asegurar que la vista esté montada -->
+    <!-- Carga de la lógica JavaScript -->
     <script src="app.js"></script>
 </body>
 </html>

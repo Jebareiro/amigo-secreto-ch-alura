@@ -1,4 +1,4 @@
-# 🎁 Amigo Secreto - Challenge Oracle ONE & Alura Latam
+# Amigo Secreto - Challenge Oracle ONE & Alura Latam
 
 > Aplicación web interactiva desarrollada para la gestión y sorteo aleatorio de **Amigo Secreto**, construida con desarrollo web (HTML5, CSS3,JavaScript) dentro del marco de la ruta de formación **Oracle Next Education (ONE) + Alura Latam**.
 ---
@@ -6,7 +6,7 @@
 ## 🔗 Demo
 
 Puedes acceder y probar la versión desplegada en tiempo real a través de GitHub Pages:
-👉 **[Ver Aplicación Web - Amigo Secreto](https://jebareiro.github.io/amigo-secreto-ch-alura/)**
+➡ **[Ver Aplicación Web - Amigo Secreto](https://jebareiro.github.io/amigo-secreto-ch-alura/)**
 
 ---
 
@@ -29,8 +29,7 @@ Puedes acceder y probar la versión desplegada en tiempo real a través de GitHu
 
 | Vista Principal (Dashboard) | Registro de Participantes | Sorteo y Resultado |
 | :---: | :---: | :---: |
-| ![Vista Principal](evidencia1.png) | ![Registro](evidencia2.png) | ![Resultado](evidencia3.png) |
-
+| <img src="evidencia1.png" width="250"> | <img src="evidencia2.png" width="250"> | <img src="evidencia3.png" width="250"> |
 ---
 
 ## 💻 Ejecución Local

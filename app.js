@@ -2,8 +2,10 @@
 // 1. ESTADO GLOBAL Y CONFIGURACIÓN
 // ==========================================================================
 
-// Arreglo principal para almacenar la lista de amigos
-let amigos = [];
+// Arreglos principales de la aplicación
+let amigos = [];            // Lista de participantes agregados
+let parejasSorteadas = [];  // Parejas generadas [{ de: "Mati", para: "Paola" }, ...]
+let indiceActual = 0;       // Controla qué pareja se muestra en pantalla
 
 // Paleta de colores suaves para los avatares dinámicos
 const coloresAvatar = [
@@ -110,17 +112,16 @@ function actualizarLista() {
 }
 
 // ==========================================================================
-// 3. LÓGICA DE SORTEO Y REINICIO
+// 3. LÓGICA DE SORTEO PASO A PASO Y REINICIO
 // ==========================================================================
 
 /**
- * Selecciona aleatoriamente un participante de la lista y muestra el resultado.
+ * Genera la cadena completa de parejas de forma aleatoria y prepara la vista.
  */
 function sortearAmigo() {
     const mensajeError = document.getElementById('mensaje-error');
     const displayInicial = document.getElementById('display-inicial');
     const displayResultado = document.getElementById('display-resultado');
-    const resultadoHTML = document.getElementById('resultado');
 
     mensajeError.textContent = '';
 
@@ -130,14 +131,74 @@ function sortearAmigo() {
         return;
     }
 
-    // Generar índice aleatorio
-    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
-    const ganador = amigos[indiceAleatorio];
+    // 1. Clonar y mezclar el arreglo aleatoriamente (Algoritmo Fisher-Yates)
+    let copia = [...amigos];
+    for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
 
-    // Mostrar resultado en la columna central
-    resultadoHTML.textContent = ganador;
+    // 2. Crear las parejas en cadena circular (nadie se saca a sí mismo)
+    parejasSorteadas = [];
+    for (let i = 0; i < copia.length; i++) {
+        let de = copia[i];
+        let para = copia[(i + 1) % copia.length]; // El último le regala al primero
+        parejasSorteadas.push({ de, para });
+    }
+
+    // 3. Ocultar inicio y mostrar tarjeta de resultados
     displayInicial.classList.add('hidden');
     displayResultado.classList.remove('hidden');
+
+    // 4. Iniciar la visualización en la primera pareja
+    indiceActual = 0;
+    mostrarParejaActual();
+}
+
+/**
+ * Actualiza la tarjeta central con la pareja correspondiente al índice actual.
+ */
+function mostrarParejaActual() {
+    const contadorPareja = document.getElementById('contador-pareja');
+    const resultadoHTML = document.getElementById('resultado');
+    const btnSiguiente = document.getElementById('btnSiguiente');
+
+    const pareja = parejasSorteadas[indiceActual];
+
+    // Actualizar indicador de paso (ej. Pareja 1 de 4)
+    contadorPareja.textContent = `Pareja ${indiceActual + 1} de ${parejasSorteadas.length}`;
+
+    // Mostrar el texto dinámico de quién le regala a quién
+    resultadoHTML.innerHTML = `
+        <span style="font-size: 1.1rem; color: #6366f1; font-weight: 600; display: block; margin-bottom: 4px;">
+            ${pareja.de}
+        </span>
+        <span style="font-size: 0.9rem; color: #64748b; font-weight: normal; display: block; margin-bottom: 4px;">
+            le regala a
+        </span>
+        <span style="font-size: 1.4rem; color: #1e293b; font-weight: 700; display: block;">
+            🎉 ${pareja.para} 🎉
+        </span>
+    `;
+
+    // Cambiar el texto del botón al llegar al final del recorrido
+    if (indiceActual === parejasSorteadas.length - 1) {
+        btnSiguiente.textContent = "Finalizar Sorteo 🔄";
+    } else {
+        btnSiguiente.textContent = "Siguiente Pareja ➔";
+    }
+}
+
+/**
+ * Avanza a la siguiente pareja o reinicia el juego al terminar.
+ */
+function siguientePareja() {
+    if (indiceActual < parejasSorteadas.length - 1) {
+        indiceActual++;
+        mostrarParejaActual();
+    } else {
+        reiniciarJuego();
+    }
 }
 
 /**
@@ -145,6 +206,9 @@ function sortearAmigo() {
  */
 function reiniciarJuego() {
     amigos = [];
+    parejasSorteadas = [];
+    indiceActual = 0;
+    
     actualizarLista();
 
     const input = document.getElementById('amigo');
