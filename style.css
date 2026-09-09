@@ -404,6 +404,71 @@ body {
     padding: 12px 20px;
 }
 
+/* ==========================================================================
+   ESTILOS DE CONTENEDOR TIPO NAVEGADOR (MOCKUP) Y CONTROL DE TAMAÑO
+   ========================================================================== */
+
+/* Fondo general que llena toda la pantalla */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e2e8f0; /* Fondo gris suave para destacar el marco */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Envoltorio exterior con padding para evitar tocar bordes */
+.wrapper-bg {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Ventana estilo navegador */
+.browser-frame {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+}
+
+/* Barra superior del navegador */
+.browser-header {
+    background-color: #f1f5f9;
+    padding: 12px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+}
+
+/* Puntos de colores estilo Mac (Rojo, Amarillo, Verde) */
+.browser-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-close { background-color: #ff5f56; }
+.dot-minimize { background-color: #ffbd2e; }
+.dot-expand { background-color: #27c93f; }
+
+/* Ajuste interno de la app dentro de la ventana */
+.app-container {
+    padding: 24px 32px;
+    max-width: 100% !important; /* Aprovecha el ancho del marco */
+    margin: 0 auto;
+}
+
 @media (max-width: 900px) {
     .dashboard-grid {
         grid-template-columns: 1fr; /* Columna única en móviles */

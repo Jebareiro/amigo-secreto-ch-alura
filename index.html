@@ -15,141 +15,137 @@
 </head>
 <body>
 
-    <!-- Contenedor principal que envuelve toda la aplicación -->
-    <div class="app-container">
+    <body>
 
-        <!-- ========================================== -->
-        <!-- 1. ENCABEZADO SUPERIOR (Header)            -->
-        <!-- ========================================== -->
-        <header class="app-header">
-            <!-- Logotipo y título del proyecto -->
-            <div class="brand">
-                <div class="brand-icon">🎁</div>
-                <div class="brand-text">
-                    <h1>Amigo Secreto</h1>
-                    <p>La magia de regalar, sin complicaciones</p>
+    <!-- Fondo de pantalla general -->
+    <div class="wrapper-bg">
+
+        <!-- Ventana estilo Navegador (Mockup) -->
+        <div class="browser-frame">
+            
+            <!-- Barra superior estilo Mac con los 3 botoncitos -->
+            <div class="browser-header">
+                <div class="browser-dots">
+                    <span class="dot dot-close"></span>
+                    <span class="dot dot-minimize"></span>
+                    <span class="dot dot-expand"></span>
                 </div>
             </div>
-        </header>
 
-        <!-- ========================================== -->
-        <!-- 2. GRILLA PRINCIPAL DE 3 COLUMNAS (Main)   -->
-        <!-- ========================================== -->
-        <main class="dashboard-grid">
-            
-            <!-- -------------------------------------- -->
-            <!-- COLUMNA 1: Formulario, Lista y Acciones -->
-            <!-- -------------------------------------- -->
-            <section class="card card-input">
-                <!-- Título del paso 1 -->
-                <div class="card-header">
-                    <span class="step-icon">👤</span>
-                    <h2>1. Agrega participantes</h2>
-                </div>
+            <!-- CONTENIDO DE TU APP (Tu div actual de siempre) -->
+            <div class="app-container">
 
-                <!-- Campo de texto y botón '+' para añadir nombres -->
-                <div class="input-group">
-                    <input type="text" id="amigo" placeholder="Escribe un nombre..." autocomplete="off">
-                    <button id="btnAgregar" onclick="agregarAmigo()" class="btn-add">+</button>
-                </div>
-                <!-- Párrafo dinámico para mostrar mensajes de error -->
-                <p id="mensaje-error" class="error-text"></p>
-
-                <!-- Área donde se renderizarán los nombres agregados -->
-                <div class="list-section">
-                    <div class="list-header">
-                        <span>👥 Lista de participantes (<span id="contador">0</span>)</span>
+                <!-- 1. ENCABEZADO SUPERIOR (Header) -->
+                <header class="app-header">
+                    <div class="brand">
+                        <div class="brand-icon">🎁</div>
+                        <div class="brand-text">
+                            <h1>Amigo Secreto</h1>
+                            <p>La magia de regalar, sin complicaciones</p>
+                        </div>
                     </div>
-                    <ul id="listaAmigos" class="participants-list"></ul>
-                </div>
+                </header>
 
-                <!-- Botones de control (Sorteo y Reinicio) -->
-                <div class="actions-group">
-                    <button class="btn-primary" onclick="sortearAmigo()">
-                        <span>🔀</span> Realizar sorteo
-                    </button>
-                    <button class="btn-secondary" onclick="reiniciarJuego()">
-                        <span>🔄</span> Reiniciar
-                    </button>
-                </div>
-            </section>
+                <!-- 2. GRILLA PRINCIPAL DE 3 COLUMNAS (Main) -->
+                <main class="dashboard-grid">
+                    
+                    <!-- COLUMNA 1 -->
+                    <section class="card card-input">
+                        <div class="card-header">
+                            <span class="step-icon">👤</span>
+                            <h2>1. Agrega participantes</h2>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="amigo" placeholder="Escribe un nombre..." autocomplete="off">
+                            <button id="btnAgregar" onclick="agregarAmigo()" class="btn-add">+</button>
+                        </div>
+                        <p id="mensaje-error" class="error-text"></p>
 
-            <!-- -------------------------------------- -->
-            <!-- COLUMNA 2: Ilustración central / Resultado Paso a Paso -->
-            <!-- -------------------------------------- -->
-            <section class="card card-display">
-                <!-- Estado Inicial: Muestra la ilustración antes de sortear -->
-                <div id="display-inicial" class="display-content">
-                    <div class="illustration-box">
-                        <span class="gift-emoji">🎁</span>
-                    </div>
-                    <h2>¡Sorteo listo para la diversión!</h2>
-                    <p>Con una lista de participantes, la magia del amigo secreto comienza.</p>
-                    <span class="heart-icon">💜</span>
-                </div>
+                        <div class="list-section">
+                            <div class="list-header">
+                                <span>👥 Lista de participantes (<span id="contador">0</span>)</span>
+                            </div>
+                            <ul id="listaAmigos" class="participants-list"></ul>
+                        </div>
 
-                <!-- Estado Resultado: Se muestra al presionar "Realizar sorteo" -->
-                <div id="display-resultado" class="display-content hidden">
-                    <div class="winner-box">
-                        <span class="trophy-emoji">🎉</span>
-                    </div>
-                    <p id="contador-pareja" class="result-label">Pareja 1 de X</p>
-                    <h2 id="resultado" class="winner-name">---</h2>
+                        <div class="actions-group">
+                            <button class="btn-primary" onclick="sortearAmigo()">
+                                <span>🔀</span> Realizar sorteo
+                            </button>
+                            <button class="btn-secondary" onclick="reiniciarJuego()">
+                                <span>🔄</span> Reiniciar
+                            </button>
+                        </div>
+                    </section>
 
-                    <!-- Botón para avanzar a la siguiente pareja -->
-                    <button id="btnSiguiente" class="btn-primary" onclick="siguientePareja()" style="margin-top: 20px;">
-                        Siguiente Pareja ➔
-                    </button>
-                </div>
-            </section>
+                    <!-- COLUMNA 2 -->
+                    <section class="card card-display">
+                        <div id="display-inicial" class="display-content">
+                            <div class="illustration-box">
+                                <span class="gift-emoji">🎁</span>
+                            </div>
+                            <h2>¡Sorteo listo para la diversión!</h2>
+                            <p>Con una lista de participantes, la magia del amigo secreto comienza.</p>
+                            <span class="heart-icon">💜</span>
+                        </div>
 
-            <!-- -------------------------------------- -->
-            <!-- COLUMNA 3: Tarjetas de Información e Inspiración -->
-            <!-- -------------------------------------- -->
-            <aside class="sidebar-column">
-                <!-- Tarjeta "¿Cómo funciona?" -->
-                <div class="card card-info">
-                    <div class="card-header">
-                        <span class="step-icon">💡</span>
-                        <h2>¿Cómo funciona?</h2>
-                    </div>
-                    <ol class="instructions-list">
-                        <li>
-                            <span class="num">1</span>
-                            <span>Agrega a los participantes</span>
-                        </li>
-                        <li>
-                            <span class="num">2</span>
-                            <span>Haz clic en "Realizar sorteo"</span>
-                        </li>
-                        <li>
-                            <span class="num">3</span>
-                            <span>Descubre las parejas una a una</span>
-                        </li>
-                    </ol>
-                </div>
+                        <div id="display-resultado" class="display-content hidden">
+                            <div class="winner-box">
+                                <span class="trophy-emoji">🎉</span>
+                            </div>
+                            <p id="contador-pareja" class="result-label">Pareja 1 de X</p>
+                            <h2 id="resultado" class="winner-name">---</h2>
+                            <button id="btnSiguiente" class="btn-primary" onclick="siguientePareja()" style="margin-top: 20px;">
+                                Siguiente Pareja ➔
+                            </button>
+                        </div>
+                    </section>
 
-                <!-- Tarjeta con frase inspiradora e icono -->
-                <div class="card card-quote">
-                    <div class="quote-header">
-                        <span>✨ Un pequeño gesto...</span>
-                    </div>
-                    <p>...puede hacer una gran diferencia.</p>
-                    <div class="gift-mini-box">🎁</div>
-                </div>
-            </aside>
+                    <!-- COLUMNA 3 -->
+                    <aside class="sidebar-column">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <span class="step-icon">💡</span>
+                                <h2>¿Cómo funciona?</h2>
+                            </div>
+                            <ol class="instructions-list">
+                                <li>
+                                    <span class="num">1</span>
+                                    <span>Agrega a los participantes</span>
+                                </li>
+                                <li>
+                                    <span class="num">2</span>
+                                    <span>Haz clic en "Realizar sorteo"</span>
+                                </li>
+                                <li>
+                                    <span class="num">3</span>
+                                    <span>Descubre las parejas una a una</span>
+                                </li>
+                            </ol>
+                        </div>
 
-        </main>
+                        <div class="card card-quote">
+                            <div class="quote-header">
+                                <span>✨ Un pequeño gesto...</span>
+                            </div>
+                            <p>...puede hacer una gran diferencia.</p>
+                            <div class="gift-mini-box">🎁</div>
+                        </div>
+                    </aside>
 
-        <!-- ========================================== -->
-        <!-- 3. PIE DE PAGINA (Footer)                  -->
-        <!-- ========================================== -->
-        <footer class="app-footer">
-            <p class="tech-stack">&lt;/&gt; HTML • CSS • JavaScript</p>
-        </footer>
-    </div>
+                </main>
 
-    <!-- Carga de la lógica JavaScript -->
+                <!-- 3. PIE DE PAGINA -->
+                <footer class="app-footer">
+                    <p class="tech-stack">&lt;/&gt; HTML • CSS • JavaScript</p>
+                </footer>
+            </div> <!-- Fin .app-container -->
+
+        </div> <!-- Fin .browser-frame -->
+
+    </div> <!-- Fin .wrapper-bg -->
+
     <script src="app.js"></script>
+</body>
 </body>
 </html>
